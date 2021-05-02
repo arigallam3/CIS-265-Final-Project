@@ -5,6 +5,8 @@ Public Class frmMain
     Dim table As New DataTable("Table")
     Dim index As Integer
 
+    Dim table2 As New DataTable("Table2")
+
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -13,8 +15,8 @@ Public Class frmMain
         table.Columns.Add("Possible Points", Type.GetType("System.Int32"))
         table.Columns.Add("Your Points", Type.GetType("System.Int32"))
 
-
         dgvOutput.DataSource = table
+
 
 
 
@@ -22,6 +24,8 @@ Public Class frmMain
 
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
+
+        cmdImport.Enabled = False
 
         table.Rows.Add(txtId.Text, txtGradedItem.Text, txtPossiblePoints.Text, txtYourPoints.Text)
         dgvOutput.DataSource = table
@@ -40,6 +44,8 @@ Public Class frmMain
             MsgBox("Append Failed")
         End Try
 
+        lblPossiblePoints.Text = "Total Possible Points: "
+        lblTotalYourPoints.Text = "Total Your Points: "
 
     End Sub
 
@@ -51,7 +57,6 @@ Public Class frmMain
         newDataRow.Cells(1).Value = txtGradedItem.Text
         newDataRow.Cells(2).Value = txtPossiblePoints.Text
         newDataRow.Cells(3).Value = txtYourPoints.Text
-
 
     End Sub
 
@@ -70,6 +75,14 @@ Public Class frmMain
 
         dgvOutput.Rows.RemoveAt(index)
 
+        txtId.Text = Nothing
+        txtGradedItem.Text = Nothing
+        txtPossiblePoints.Text = Nothing
+        txtYourPoints.Text = Nothing
+
+        lblPossiblePoints.Text = "Total Possible Points: "
+        lblTotalYourPoints.Text = "Total Your Points: "
+
     End Sub
 
     Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
@@ -77,7 +90,16 @@ Public Class frmMain
         Dim lines() As String
         Dim vals() As String
 
-        lines = File.ReadAllLines("C:\Home\Student\Gallamoza\Final Project\bin\Debug\grade1.txt")
+        Dim strText As String
+        dlgOpenFile.Filter = "Text File|*.txt"
+        dlgOpenFile.InitialDirectory = "C:\Home\Student\Gallamoza\Final Project\bin\Debug"
+        dlgOpenFile.Title = "Open Text Files"
+        dlgOpenFile.ShowDialog()
+
+        strText = dlgOpenFile.FileName
+
+
+        lines = File.ReadAllLines(strText)
 
         For i As Integer = 0 To lines.Length - 1 Step +1
 
@@ -93,6 +115,87 @@ Public Class frmMain
             table.Rows.Add(row)
 
         Next i
+
+        'Total Possible Points and Total of Your Points 
+
+        Dim dTotalPossiblePoints As Double
+        For Each r As DataGridViewRow In dgvOutput.Rows
+            dTotalPossiblePoints += r.Cells(2).Value
+        Next
+
+        lblPossiblePoints.Text = lblPossiblePoints.Text & " " & dTotalPossiblePoints & vbCrLf
+
+        Dim dTotalYourPoints As Double
+        For Each r As DataGridViewRow In dgvOutput.Rows
+            dTotalYourPoints += r.Cells(3).Value
+        Next
+
+        lblTotalYourPoints.Text = lblTotalYourPoints.Text & " " & dTotalYourPoints
+
+    End Sub
+
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        txtId.Text = Nothing
+        txtGradedItem.Text = Nothing
+        txtPossiblePoints.Text = Nothing
+        txtYourPoints.Text = Nothing
+
+        dgvGrade.Visible = False
+
+    End Sub
+
+    Private Sub cmdExit_Click(sender As Object, e As EventArgs) Handles cmdExit.Click
+        End
+    End Sub
+
+    Private Sub cmdUpdateTotal_Click(sender As Object, e As EventArgs) Handles cmdUpdateTotal.Click
+
+        'Total Possible Points and Total of Your Points 
+
+        Dim dTotalPossiblePoints As Double
+        For Each r As DataGridViewRow In dgvOutput.Rows
+            dTotalPossiblePoints += r.Cells(2).Value
+        Next
+
+        lblPossiblePoints.Text = lblPossiblePoints.Text & " " & dTotalPossiblePoints & vbCrLf
+
+        Dim dTotalYourPoints As Double
+        For Each r As DataGridViewRow In dgvOutput.Rows
+            dTotalYourPoints += r.Cells(3).Value
+        Next
+
+        lblTotalYourPoints.Text = lblTotalYourPoints.Text & " " & dTotalYourPoints
+    End Sub
+
+    Private Sub cmdLetterGrade_Click(sender As Object, e As EventArgs) Handles cmdLetterGrade.Click
+
+        dgvGrade.Visible = True
+
+
+        table2.Columns.Add("Grade", Type.GetType("System.String"))
+        table2.Columns.Add("Percentage", Type.GetType("System.Int32"))
+        table2.Columns.Add(">=", Type.GetType("System.Double"))
+        table2.Columns.Add("<", Type.GetType("System.Double"))
+
+        dgvGrade.DataSource = table2
+
+
+
+        Dim dTotalPossiblePoints As Double
+        For Each r As DataGridViewRow In dgvOutput.Rows
+            dTotalPossiblePoints += r.Cells(2).Value
+        Next
+
+        table2.Rows.Add("A", 95, ((95 * dTotalPossiblePoints) / 100), 0)
+        table2.Rows.Add("A-", 90, ((90 * dTotalPossiblePoints) / 100), ((95 * dTotalPossiblePoints) / 100))
+        table2.Rows.Add("B+", 87, ((87 * dTotalPossiblePoints) / 100), ((90 * dTotalPossiblePoints) / 100))
+        table2.Rows.Add("B", 83, ((83 * dTotalPossiblePoints) / 100), ((87 * dTotalPossiblePoints) / 100))
+        table2.Rows.Add("B-", 80, ((80 * dTotalPossiblePoints) / 100), ((83 * dTotalPossiblePoints) / 100))
+        table2.Rows.Add("C+", 75, ((75 * dTotalPossiblePoints) / 100), ((80 * dTotalPossiblePoints) / 100))
+        table2.Rows.Add("C", 70, ((70 * dTotalPossiblePoints) / 100), ((75 * dTotalPossiblePoints) / 100))
+        table2.Rows.Add("D+", 67, ((67 * dTotalPossiblePoints) / 100), ((70 * dTotalPossiblePoints) / 100))
+        table2.Rows.Add("D", 63, ((63 * dTotalPossiblePoints) / 100), ((67 * dTotalPossiblePoints) / 100))
+        table2.Rows.Add("D-", 60, ((60 * dTotalPossiblePoints) / 100), ((63 * dTotalPossiblePoints) / 100))
 
     End Sub
 End Class
