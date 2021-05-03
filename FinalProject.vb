@@ -17,9 +17,6 @@ Public Class frmMain
 
         dgvOutput.DataSource = table
 
-
-
-
     End Sub
 
 
@@ -32,10 +29,14 @@ Public Class frmMain
 
         Dim textToAppend As String
 
-        textToAppend = txtId.Text + "," + txtGradedItem.Text + "," + txtPossiblePoints.Text + "," + txtYourPoints.Text + vbCrLf
+        textToAppend = Environment.NewLine + txtId.Text + "," + txtGradedItem.Text + "," + txtPossiblePoints.Text + "," + txtYourPoints.Text
+
+        Dim strText As String
+
+        strText = dlgOpenFile.FileName
 
         Try
-            File.AppendAllText("grade1.txt", textToAppend)
+            File.AppendAllText(strText, textToAppend)
             txtId.Clear()
             txtGradedItem.Clear()
             txtPossiblePoints.Clear()
@@ -45,11 +46,13 @@ Public Class frmMain
         End Try
 
         lblPossiblePoints.Text = "Total Possible Points: "
-        lblTotalYourPoints.Text = "Total Your Points: "
+        lblTotalYourPoints.Text = "Total of Your Points: "
 
     End Sub
 
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
+
+        cmdImport.Enabled = False
 
         Dim newDataRow As DataGridViewRow
         newDataRow = dgvOutput.Rows(index)
@@ -57,6 +60,9 @@ Public Class frmMain
         newDataRow.Cells(1).Value = txtGradedItem.Text
         newDataRow.Cells(2).Value = txtPossiblePoints.Text
         newDataRow.Cells(3).Value = txtYourPoints.Text
+
+        lblPossiblePoints.Text = "Total Possible Points: "
+        lblTotalYourPoints.Text = "Total of Your Points: "
 
     End Sub
 
@@ -72,7 +78,7 @@ Public Class frmMain
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-
+        cmdImport.Enabled = False
         dgvOutput.Rows.RemoveAt(index)
 
         txtId.Text = Nothing
@@ -81,7 +87,7 @@ Public Class frmMain
         txtYourPoints.Text = Nothing
 
         lblPossiblePoints.Text = "Total Possible Points: "
-        lblTotalYourPoints.Text = "Total Your Points: "
+        lblTotalYourPoints.Text = "Total of Your Points: "
 
     End Sub
 
@@ -92,7 +98,7 @@ Public Class frmMain
 
         Dim strText As String
         dlgOpenFile.Filter = "Text File|*.txt"
-        dlgOpenFile.InitialDirectory = "C:\Home\Student\Gallamoza\Final Project\bin\Debug"
+        dlgOpenFile.InitialDirectory = "C:\Home\Student\Gallamoza\Grades"
         dlgOpenFile.Title = "Open Text Files"
         dlgOpenFile.ShowDialog()
 
@@ -141,6 +147,8 @@ Public Class frmMain
         txtYourPoints.Text = Nothing
 
         dgvGrade.Visible = False
+        lblPossiblePoints.Text = "Total Possible Points: "
+        lblTotalYourPoints.Text = "Total of Your Points: "
 
     End Sub
 
