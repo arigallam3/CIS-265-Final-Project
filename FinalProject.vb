@@ -98,7 +98,7 @@ Public Class frmMain
 
         Dim strText As String
         dlgOpenFile.Filter = "Text File|*.txt"
-        dlgOpenFile.InitialDirectory = "C:\Home\Student\Gallamoza\Grades"
+        'dlgOpenFile.InitialDirectory = "C:\Home\Student\Gallamoza\Grades"
         dlgOpenFile.Title = "Open Text Files"
         dlgOpenFile.ShowDialog()
 

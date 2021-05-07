@@ -110,7 +110,7 @@ Partial Class frmMain
         Me.cmdAdd.Location = New System.Drawing.Point(539, 67)
         Me.cmdAdd.Name = "cmdAdd"
         Me.cmdAdd.Size = New System.Drawing.Size(119, 53)
-        Me.cmdAdd.TabIndex = 7
+        Me.cmdAdd.TabIndex = 6
         Me.cmdAdd.Text = "Add"
         Me.cmdAdd.UseVisualStyleBackColor = True
         '
@@ -119,7 +119,7 @@ Partial Class frmMain
         Me.cmdUpdate.Location = New System.Drawing.Point(721, 67)
         Me.cmdUpdate.Name = "cmdUpdate"
         Me.cmdUpdate.Size = New System.Drawing.Size(119, 53)
-        Me.cmdUpdate.TabIndex = 8
+        Me.cmdUpdate.TabIndex = 7
         Me.cmdUpdate.Text = "Update"
         Me.cmdUpdate.UseVisualStyleBackColor = True
         '
@@ -128,7 +128,7 @@ Partial Class frmMain
         Me.cmdDelete.Location = New System.Drawing.Point(893, 67)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(119, 53)
-        Me.cmdDelete.TabIndex = 9
+        Me.cmdDelete.TabIndex = 8
         Me.cmdDelete.Text = "Delete"
         Me.cmdDelete.UseVisualStyleBackColor = True
         '
@@ -146,14 +146,14 @@ Partial Class frmMain
         Me.txtId.Location = New System.Drawing.Point(195, 174)
         Me.txtId.Name = "txtId"
         Me.txtId.Size = New System.Drawing.Size(178, 22)
-        Me.txtId.TabIndex = 11
+        Me.txtId.TabIndex = 2
         '
         'cmdImport
         '
         Me.cmdImport.Location = New System.Drawing.Point(120, 46)
         Me.cmdImport.Name = "cmdImport"
         Me.cmdImport.Size = New System.Drawing.Size(91, 57)
-        Me.cmdImport.TabIndex = 12
+        Me.cmdImport.TabIndex = 1
         Me.cmdImport.Text = "Import"
         Me.cmdImport.UseVisualStyleBackColor = True
         '
@@ -162,7 +162,7 @@ Partial Class frmMain
         Me.cmdClear.Location = New System.Drawing.Point(133, 632)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(104, 55)
-        Me.cmdClear.TabIndex = 13
+        Me.cmdClear.TabIndex = 11
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
@@ -171,7 +171,7 @@ Partial Class frmMain
         Me.cmdExit.Location = New System.Drawing.Point(269, 632)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.Size = New System.Drawing.Size(104, 55)
-        Me.cmdExit.TabIndex = 14
+        Me.cmdExit.TabIndex = 12
         Me.cmdExit.Text = "Exit"
         Me.cmdExit.UseVisualStyleBackColor = True
         '
@@ -198,7 +198,7 @@ Partial Class frmMain
         Me.cmdUpdateTotal.Location = New System.Drawing.Point(507, 681)
         Me.cmdUpdateTotal.Name = "cmdUpdateTotal"
         Me.cmdUpdateTotal.Size = New System.Drawing.Size(294, 36)
-        Me.cmdUpdateTotal.TabIndex = 17
+        Me.cmdUpdateTotal.TabIndex = 9
         Me.cmdUpdateTotal.Text = "Update Total Amount of Points"
         Me.cmdUpdateTotal.UseVisualStyleBackColor = True
         '
@@ -207,7 +207,7 @@ Partial Class frmMain
         Me.cmdLetterGrade.Location = New System.Drawing.Point(822, 681)
         Me.cmdLetterGrade.Name = "cmdLetterGrade"
         Me.cmdLetterGrade.Size = New System.Drawing.Size(294, 36)
-        Me.cmdLetterGrade.TabIndex = 18
+        Me.cmdLetterGrade.TabIndex = 10
         Me.cmdLetterGrade.Text = "Determine what grade you have"
         Me.cmdLetterGrade.UseVisualStyleBackColor = True
         '
