@@ -24,6 +24,7 @@ Public Class frmMain
 
         cmdImport.Enabled = False
 
+        'this creates a row
         table.Rows.Add(txtId.Text, txtGradedItem.Text, txtPossiblePoints.Text, txtYourPoints.Text)
         dgvOutput.DataSource = table
 
