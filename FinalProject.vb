@@ -9,7 +9,7 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
+        'this adds columns
         table.Columns.Add("Id", Type.GetType("System.Int32"))
         table.Columns.Add("Graded Item", Type.GetType("System.String"))
         table.Columns.Add("Possible Points", Type.GetType("System.Int32"))
