@@ -13,7 +13,7 @@ Public Class frmMain
         table.Columns.Add("Id", Type.GetType("System.Int32"))
         table.Columns.Add("Graded Item", Type.GetType("System.String"))
         table.Columns.Add("Possible Points", Type.GetType("System.Int32"))
-        table.Columns.Add("Your Points", Type.GetType("System.Int32"))
+        table.Columns.Add("Your Points", Type.GetType("System.Int32"))   'this is a column
 
         dgvOutput.DataSource = table
 
