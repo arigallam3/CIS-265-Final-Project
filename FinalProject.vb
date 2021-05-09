@@ -24,7 +24,7 @@ Public Class frmMain
 
         cmdImport.Enabled = False
 
-        'this creates a row
+        'this adds a row
         table.Rows.Add(txtId.Text, txtGradedItem.Text, txtPossiblePoints.Text, txtYourPoints.Text)
         dgvOutput.DataSource = table
 
@@ -81,6 +81,8 @@ Public Class frmMain
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
         cmdImport.Enabled = False
+
+        'deletes a row at a specific index
         dgvOutput.Rows.RemoveAt(index)
 
         txtId.Text = Nothing
@@ -107,6 +109,7 @@ Public Class frmMain
         strText = dlgOpenFile.FileName
 
 
+        'this reads each line in the file and saves it
         slines = File.ReadAllLines(strText)
 
         For i As Integer = 0 To slines.Length - 1 Step +1
@@ -143,6 +146,7 @@ Public Class frmMain
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        'clears contents of the table and textboxes
         txtId.Text = Nothing
         txtGradedItem.Text = Nothing
         txtPossiblePoints.Text = Nothing
@@ -178,7 +182,7 @@ Public Class frmMain
     End Sub
 
     Private Sub cmdLetterGrade_Click(sender As Object, e As EventArgs) Handles cmdLetterGrade.Click
-
+        'this displays the letter grade equivalent of sutdents scores
         dgvGrade.Visible = True
 
 
