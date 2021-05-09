@@ -146,6 +146,7 @@ Public Class frmMain
 
         If dTotalYourPoints <= 70 Then
             cmdResources.Visible = True
+            MsgBox("Click the 'Helpful Resources' button!")
         End If
 
 
@@ -251,6 +252,14 @@ Public Class frmMain
     Private Sub cmdResources_Click(sender As Object, e As EventArgs) Handles cmdResources.Click
         webViewResources.Visible = True
         Me.Size = New System.Drawing.Size(New System.Drawing.Point(1000, 1000))
-        webViewResources.Source = New Uri("https://www.towson.edu/tutoring-learning/")
+        webViewResources.Source = New Uri("https://youtube.com/playlist?list=PLTd6ceoshpremSFQxYM4L0p4Q6hR-4e4J")
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        MsgBox("This application is a Grade Calculator. Choose a Text File from directory which populates text file data into table, in each text box field, you can input Id, Graded Item, Possible Points, and Your Points to add into the table which will also add into the text file, you can update a row but you cannot update the text file, You can delete a row but you cannot delete the line in text file, you must delete a line through opening the text file in your directory then making sure to save, Once table is imported with given data from text file, it calculates the total possible points and the total of the students points. Also, by clicking on the 'Determine what grade you have' button, you can see your percentage.")
+    End Sub
+
+    Private Sub ContactToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ContactToolStripMenuItem.Click
+        MsgBox("Need help? Contact: agalla18@students.towson.edu OR olana1@students.towson.edu OR dboama1@students.towson.edu OR fdunba1@students.towson.edu OR asingh31@students.towson.edu OR cdelga5@students.towson.edu for more information")
     End Sub
 End Class

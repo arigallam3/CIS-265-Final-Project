@@ -297,9 +297,10 @@ Partial Class frmMain
         '
         Me.webViewResources.CreationProperties = Nothing
         Me.webViewResources.DefaultBackgroundColor = System.Drawing.Color.White
-        Me.webViewResources.Location = New System.Drawing.Point(118, 758)
+        Me.webViewResources.Location = New System.Drawing.Point(34, 758)
         Me.webViewResources.Name = "webViewResources"
-        Me.webViewResources.Size = New System.Drawing.Size(363, 413)
+        Me.webViewResources.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.webViewResources.Size = New System.Drawing.Size(520, 413)
         Me.webViewResources.TabIndex = 23
         Me.webViewResources.Visible = False
         Me.webViewResources.ZoomFactor = 1.0R
