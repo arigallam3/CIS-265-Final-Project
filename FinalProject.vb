@@ -9,6 +9,7 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Me.Size = New System.Drawing.Size(New System.Drawing.Point(1000, 700))
 
         table.Columns.Add("Id", Type.GetType("System.Int32"))
         table.Columns.Add("Graded Item", Type.GetType("System.String"))
@@ -122,6 +123,12 @@ Public Class frmMain
 
         Next i
 
+        Dim fileName As String = Path.GetFileName(strText)
+
+        txtFileName.Visible = True
+
+        txtFileName.Text = txtFileName.Text & fileName
+
         'Total Possible Points and Total of Your Points 
 
         Dim dTotalPossiblePoints As Double
@@ -138,6 +145,11 @@ Public Class frmMain
 
         lblTotalYourPoints.Text = lblTotalYourPoints.Text & " " & dTotalYourPoints
 
+        If dTotalYourPoints <= 70 Then
+            cmdResources.Visible = True
+        End If
+
+
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
@@ -147,8 +159,12 @@ Public Class frmMain
         txtYourPoints.Text = Nothing
 
         dgvGrade.Visible = False
+
         lblPossiblePoints.Text = "Total Possible Points: "
         lblTotalYourPoints.Text = "Total of Your Points: "
+
+
+        cmdResources.Visible = False
 
     End Sub
 
@@ -173,10 +189,13 @@ Public Class frmMain
         Next
 
         lblTotalYourPoints.Text = lblTotalYourPoints.Text & " " & dTotalYourPoints
+        If dTotalYourPoints <= 70 Then
+            cmdResources.Visible = True
+        End If
     End Sub
 
     Private Sub cmdLetterGrade_Click(sender As Object, e As EventArgs) Handles cmdLetterGrade.Click
-
+        Me.Size = New System.Drawing.Size(New System.Drawing.Point(1000, 1000))
         dgvGrade.Visible = True
 
 
@@ -205,5 +224,34 @@ Public Class frmMain
         table2.Rows.Add("D", 63, ((63 * dTotalPossiblePoints) / 100), ((67 * dTotalPossiblePoints) / 100))
         table2.Rows.Add("D-", 60, ((60 * dTotalPossiblePoints) / 100), ((63 * dTotalPossiblePoints) / 100))
 
+        RowsColor()
+
+    End Sub
+
+    Public Sub RowsColor()
+
+        For i As Integer = 0 To dgvGrade.Rows.Count() - 1 Step +1
+            Dim val As Integer
+            val = dgvGrade.Rows(i).Cells(1).Value
+            If val <= 67 Then
+                dgvGrade.Rows(i).DefaultCellStyle.BackColor = Color.Red
+            ElseIf val >= 70 And val <= 75 Then
+                dgvGrade.Rows(i).DefaultCellStyle.BackColor = Color.Yellow
+            ElseIf val >= 80 And val <= 95 Then
+                dgvGrade.Rows(i).DefaultCellStyle.BackColor = Color.Green
+            ElseIf val > 100 Then
+                dgvGrade.Rows(i).DefaultCellStyle.BackColor = Color.Green
+            End If
+        Next
+    End Sub
+
+    Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
+        End
+    End Sub
+
+    Private Sub cmdResources_Click(sender As Object, e As EventArgs) Handles cmdResources.Click
+        webViewResources.Visible = True
+        Me.Size = New System.Drawing.Size(New System.Drawing.Point(1000, 1000))
+        webViewResources.Source = New Uri("https://www.towson.edu/tutoring-learning/")
     End Sub
 End Class
