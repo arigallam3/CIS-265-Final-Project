@@ -13,7 +13,7 @@ Public Class frmMain
         table.Columns.Add("Id", Type.GetType("System.Int32"))
         table.Columns.Add("Graded Item", Type.GetType("System.String"))
         table.Columns.Add("Possible Points", Type.GetType("System.Int32"))
-        table.Columns.Add("Your Points", Type.GetType("System.Int32"))   'this is a column
+        table.Columns.Add("Your Points", Type.GetType("System.Int32"))
 
         dgvOutput.DataSource = table
 
@@ -28,16 +28,17 @@ Public Class frmMain
         table.Rows.Add(txtId.Text, txtGradedItem.Text, txtPossiblePoints.Text, txtYourPoints.Text)
         dgvOutput.DataSource = table
 
-        Dim textToAppend As String
+        Dim stextToAppend As String
 
-        textToAppend = Environment.NewLine + txtId.Text + "," + txtGradedItem.Text + "," + txtPossiblePoints.Text + "," + txtYourPoints.Text
+        stextToAppend = Environment.NewLine & txtId.Text & "," & txtGradedItem.Text & "," & txtPossiblePoints.Text & "," & txtYourPoints.Text
 
         Dim strText As String
 
+        'open and saves file content
         strText = dlgOpenFile.FileName
 
         Try
-            File.AppendAllText(strText, textToAppend)
+            File.AppendAllText(strText, stextToAppend)
             txtId.Clear()
             txtGradedItem.Clear()
             txtPossiblePoints.Clear()
@@ -94,8 +95,8 @@ Public Class frmMain
 
     Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
 
-        Dim lines() As String
-        Dim vals() As String
+        Dim slines() As String
+        Dim svals() As String
 
         Dim strText As String
         dlgOpenFile.Filter = "Text File|*.txt"
@@ -106,20 +107,20 @@ Public Class frmMain
         strText = dlgOpenFile.FileName
 
 
-        lines = File.ReadAllLines(strText)
+        slines = File.ReadAllLines(strText)
 
-        For i As Integer = 0 To lines.Length - 1 Step +1
+        For i As Integer = 0 To slines.Length - 1 Step +1
 
-            vals = lines(i).ToString().Split(",")
-            Dim row(vals.Length - 1) As String
+            svals = slines(i).ToString().Split(",")
+            Dim srow(svals.Length - 1) As String
 
-            For j As Integer = 0 To vals.Length - 1 Step +1
+            For j As Integer = 0 To svals.Length - 1 Step +1
 
-                row(j) = vals(j).Trim()
+                srow(j) = svals(j).Trim()
 
             Next j
 
-            table.Rows.Add(row)
+            table.Rows.Add(srow)
 
         Next i
 
