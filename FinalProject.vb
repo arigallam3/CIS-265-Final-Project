@@ -135,7 +135,7 @@ Public Class frmMain
 
         Dim dTotalYourPoints As Double
         For Each r As DataGridViewRow In dgvOutput.Rows
-            dTotalYourPoints += r.Cells(3).Value
+            dTotalYourPoints = dTotalPossiblePoints + r.Cells(3).Value
         Next
 
         lblTotalYourPoints.Text = lblTotalYourPoints.Text & " " & dTotalYourPoints
@@ -164,14 +164,14 @@ Public Class frmMain
 
         Dim dTotalPossiblePoints As Double
         For Each r As DataGridViewRow In dgvOutput.Rows
-            dTotalPossiblePoints += r.Cells(2).Value
+            dTotalPossiblePoints = dTotalPossiblePoints + r.Cells(2).Value
         Next
 
         lblPossiblePoints.Text = lblPossiblePoints.Text & " " & dTotalPossiblePoints & vbCrLf
 
         Dim dTotalYourPoints As Double
         For Each r As DataGridViewRow In dgvOutput.Rows
-            dTotalYourPoints += r.Cells(3).Value
+            dTotalYourPoints = dTotalPossiblePoints + r.Cells(3).Value
         Next
 
         lblTotalYourPoints.Text = lblTotalYourPoints.Text & " " & dTotalYourPoints
