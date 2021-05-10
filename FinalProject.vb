@@ -24,19 +24,21 @@ Public Class frmMain
 
         cmdImport.Enabled = False
 
+        'this adds a row
         table.Rows.Add(txtId.Text, txtGradedItem.Text, txtPossiblePoints.Text, txtYourPoints.Text)
         dgvOutput.DataSource = table
 
-        Dim textToAppend As String
+        Dim stextToAppend As String
 
-        textToAppend = Environment.NewLine + txtId.Text + "," + txtGradedItem.Text + "," + txtPossiblePoints.Text + "," + txtYourPoints.Text
+        stextToAppend = Environment.NewLine & txtId.Text & "," & txtGradedItem.Text & "," & txtPossiblePoints.Text & "," & txtYourPoints.Text
 
         Dim strText As String
 
+        'open and saves file content
         strText = dlgOpenFile.FileName
 
         Try
-            File.AppendAllText(strText, textToAppend)
+            File.AppendAllText(strText, stextToAppend)
             txtId.Clear()
             txtGradedItem.Clear()
             txtPossiblePoints.Clear()
@@ -79,6 +81,8 @@ Public Class frmMain
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
         cmdImport.Enabled = False
+
+        'deletes a row at a specific index
         dgvOutput.Rows.RemoveAt(index)
 
         txtId.Text = Nothing
@@ -93,8 +97,8 @@ Public Class frmMain
 
     Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
 
-        Dim lines() As String
-        Dim vals() As String
+        Dim slines() As String
+        Dim svals() As String
 
         Dim strText As String
         dlgOpenFile.Filter = "Text File|*.txt"
@@ -105,20 +109,21 @@ Public Class frmMain
         strText = dlgOpenFile.FileName
 
 
-        lines = File.ReadAllLines(strText)
+        'this reads each line in the file and saves it
+        slines = File.ReadAllLines(strText)
 
-        For i As Integer = 0 To lines.Length - 1 Step +1
+        For i As Integer = 0 To slines.Length - 1 Step +1
 
-            vals = lines(i).ToString().Split(",")
-            Dim row(vals.Length - 1) As String
+            svals = slines(i).ToString().Split(",")
+            Dim srow(svals.Length - 1) As String
 
-            For j As Integer = 0 To vals.Length - 1 Step +1
+            For j As Integer = 0 To svals.Length - 1 Step +1
 
-                row(j) = vals(j).Trim()
+                srow(j) = svals(j).Trim()
 
             Next j
 
-            table.Rows.Add(row)
+            table.Rows.Add(srow)
 
         Next i
 
@@ -139,7 +144,7 @@ Public Class frmMain
 
         Dim dTotalYourPoints As Double
         For Each r As DataGridViewRow In dgvOutput.Rows
-            dTotalYourPoints += r.Cells(3).Value
+            dTotalYourPoints = dTotalPossiblePoints + r.Cells(3).Value
         Next
 
         lblTotalYourPoints.Text = lblTotalYourPoints.Text & " " & dTotalYourPoints
@@ -153,6 +158,7 @@ Public Class frmMain
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        'clears contents of the table and textboxes
         txtId.Text = Nothing
         txtGradedItem.Text = Nothing
         txtPossiblePoints.Text = Nothing
@@ -178,14 +184,14 @@ Public Class frmMain
 
         Dim dTotalPossiblePoints As Double
         For Each r As DataGridViewRow In dgvOutput.Rows
-            dTotalPossiblePoints += r.Cells(2).Value
+            dTotalPossiblePoints = dTotalPossiblePoints + r.Cells(2).Value
         Next
 
         lblPossiblePoints.Text = lblPossiblePoints.Text & " " & dTotalPossiblePoints & vbCrLf
 
         Dim dTotalYourPoints As Double
         For Each r As DataGridViewRow In dgvOutput.Rows
-            dTotalYourPoints += r.Cells(3).Value
+            dTotalYourPoints = dTotalPossiblePoints + r.Cells(3).Value
         Next
 
         lblTotalYourPoints.Text = lblTotalYourPoints.Text & " " & dTotalYourPoints
@@ -195,7 +201,7 @@ Public Class frmMain
     End Sub
 
     Private Sub cmdLetterGrade_Click(sender As Object, e As EventArgs) Handles cmdLetterGrade.Click
-        Me.Size = New System.Drawing.Size(New System.Drawing.Point(1000, 1000))
+
         dgvGrade.Visible = True
 
 
