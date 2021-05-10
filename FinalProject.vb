@@ -9,6 +9,7 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Me.Size = New System.Drawing.Size(New System.Drawing.Point(1000, 700))
 
         table.Columns.Add("Id", Type.GetType("System.Int32"))
         table.Columns.Add("Graded Item", Type.GetType("System.String"))
@@ -144,12 +145,16 @@ Public Class frmMain
 
         Dim dTotalYourPoints As Double
         For Each r As DataGridViewRow In dgvOutput.Rows
-            dTotalYourPoints = dTotalPossiblePoints + r.Cells(3).Value
+            dTotalYourPoints = dTotalYourPoints + r.Cells(3).Value
         Next
 
         lblTotalYourPoints.Text = lblTotalYourPoints.Text & " " & dTotalYourPoints
 
-        If dTotalYourPoints <= 70 Then
+        Dim dLowGrade As Double
+
+        dLowGrade = 70 * (dTotalPossiblePoints / 100)
+
+        If dTotalYourPoints <= dLowGrade Then
             cmdResources.Visible = True
             MsgBox("Click the 'Helpful Resources' button!")
         End If
@@ -158,6 +163,9 @@ Public Class frmMain
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+
+        Me.Size = New System.Drawing.Size(New System.Drawing.Point(1000, 700))
+
         'clears contents of the table and textboxes
         txtId.Text = Nothing
         txtGradedItem.Text = Nothing
@@ -171,6 +179,7 @@ Public Class frmMain
 
 
         cmdResources.Visible = False
+        webViewResources.Visible = False
 
     End Sub
 
@@ -191,16 +200,24 @@ Public Class frmMain
 
         Dim dTotalYourPoints As Double
         For Each r As DataGridViewRow In dgvOutput.Rows
-            dTotalYourPoints = dTotalPossiblePoints + r.Cells(3).Value
+            dTotalYourPoints = dTotalYourPoints + r.Cells(3).Value
         Next
 
         lblTotalYourPoints.Text = lblTotalYourPoints.Text & " " & dTotalYourPoints
-        If dTotalYourPoints <= 70 Then
+
+        Dim dLowGrade As Double
+
+        dLowGrade = 70 * (dTotalPossiblePoints / 100)
+
+        If dTotalYourPoints <= dLowGrade Then
             cmdResources.Visible = True
+            MsgBox("Click the 'Helpful Resources' button!")
         End If
     End Sub
 
     Private Sub cmdLetterGrade_Click(sender As Object, e As EventArgs) Handles cmdLetterGrade.Click
+
+        Me.Size = New System.Drawing.Size(New System.Drawing.Point(1000, 1000))
 
         dgvGrade.Visible = True
 
