@@ -182,7 +182,6 @@ Public Class frmMain
     End Sub
 
     Private Sub cmdLetterGrade_Click(sender As Object, e As EventArgs) Handles cmdLetterGrade.Click
-        'this displays the letter grade equivalent of sutdents scores
         dgvGrade.Visible = True
 
 
@@ -199,6 +198,8 @@ Public Class frmMain
         For Each r As DataGridViewRow In dgvOutput.Rows
             dTotalPossiblePoints += r.Cells(2).Value
         Next
+
+        'this calculates and displays the letter grade equivalent of sutdents scores
 
         table2.Rows.Add("A", 95, ((95 * dTotalPossiblePoints) / 100), 0)
         table2.Rows.Add("A-", 90, ((90 * dTotalPossiblePoints) / 100), ((95 * dTotalPossiblePoints) / 100))
